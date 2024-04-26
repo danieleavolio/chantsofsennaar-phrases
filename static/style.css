@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Now we create some variables to be used in all the web applicatin */
+
+:root{
+    --devotee-yellow: #fcf044;
+    --devotee-red: #d82b5c;
+
+    --warriors-red: #e50e51;
+    --warriors-blue: #6eb3c3;
+
+    --bards-purple: #e41f89;
+    --bards-blue: #71cfb9;
+
+    --alchemists-orange: #fd7458;
+    --alchemists-purple: #5e3579;
+
+    --anchorites-purple: #612fb5;
+    --anchorites-red: #e7198e;
+
+    /* now we create some variables for our colors */
+    --primary-color: #333;
+    --secondary-color: #f9f9f9;
+    
+}
