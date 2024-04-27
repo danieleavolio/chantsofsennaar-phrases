@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
     import { onMount } from "svelte";
 
     /**
@@ -67,9 +69,11 @@
             <div class="image-container">
                 <img src={image} alt="Devotee" />
             </div>
+            <p class="name">
+                {image.split("/").pop().split(".")[0]}
+            </p>
         {/each}
     </div>
-
 
     <h2>Warriors</h2>
     <div class="container warriors">
@@ -77,6 +81,9 @@
             <div class="image-container">
                 <img src={image} alt="Warrior" />
             </div>
+            <p class="name">
+                {image.split("/").pop().split(".")[0]}
+            </p>
         {/each}
     </div>
 
@@ -86,16 +93,21 @@
             <div class="image-container">
                 <img src={image} alt="Bard" />
             </div>
+            <p class="name">
+                {image.split("/").pop().split(".")[0]}
+            </p>
         {/each}
     </div>
 
-    
     <h2>Alchemists</h2>
     <div class="container alchemists">
         {#each alchemists as image}
             <div class="image-container">
                 <img src={image} alt="Alchemist" />
             </div>
+            <p class="name">
+                {image.split("/").pop().split(".")[0]}
+            </p>
         {/each}
     </div>
 
@@ -105,9 +117,11 @@
             <div class="image-container">
                 <img src={image} alt="Anchorite" />
             </div>
+            <p class="name">
+                {image.split("/").pop().split(".")[0]}
+            </p>
         {/each}
     </div>
-
 </main>
 
 <style>
@@ -141,43 +155,43 @@
         align-items: center;
     }
 
-    .devotee{
+    .devotee {
         background-color: var(--devotee-yellow);
     }
 
-    .warriors{
+    .warriors {
         background-color: var(--warriors-blue);
     }
 
-    .bards{
+    .bards {
         background-color: var(--bards-blue);
     }
 
-    .alchemists{
+    .alchemists {
         background-color: var(--alchemists-orange);
     }
 
-    .anchorites{
+    .anchorites {
         background-color: var(--anchorites-red);
     }
 
-    .devotee .image-container{
+    .devotee .image-container {
         background-color: var(--devotee-red);
     }
 
-    .warriors .image-container{
+    .warriors .image-container {
         background-color: var(--warriors-red);
     }
 
-    .bards .image-container{
+    .bards .image-container {
         background-color: var(--bards-purple);
     }
 
-    .alchemists .image-container{
+    .alchemists .image-container {
         background-color: var(--alchemists-purple);
     }
 
-    .anchorites .image-container{
+    .anchorites .image-container {
         background-color: var(--anchorites-purple);
     }
 </style>
