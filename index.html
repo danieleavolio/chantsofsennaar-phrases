@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<link rel="stylesheet" href="./style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link href="./_app/immutable/assets/2.ZOt_aJ87.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.Dz-683kg.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.BG9RYZ4y.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.BXr5QVQj.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.BouAuZFf.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper.D6kgxu3v.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.agM0w8aq.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.D0TExhdu.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.DNK1q3Vq.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">  <main class="svelte-7zah68"><div class="board svelte-2gdio8"><h1 data-svelte-h="svelte-w4v11u">Board</h1> <div class="container svelte-2gdio8"></div> <h3 data-svelte-h="svelte-io90xc">Your phrase is:</h3> <p class="phrase svelte-2gdio8"></p> </div> <div class="diary svelte-flej3j"><div class="scrollings svelte-flej3j"><span class="material-symbols-outlined open svelte-flej3j" data-svelte-h="svelte-13tilmd">apps</span> <h2 data-svelte-h="svelte-1wres4">Devotee</h2> <div class="container devotee svelte-flej3j"></div> <h2 data-svelte-h="svelte-xrsjsx">Warriors</h2> <div class="container warriors svelte-flej3j"></div> <h2 data-svelte-h="svelte-1tst55a">Bards</h2> <div class="container bards svelte-flej3j"></div> <h2 data-svelte-h="svelte-16xc857">Alchemists</h2> <div class="container alchemists svelte-flej3j"></div> <h2 data-svelte-h="svelte-z9dev6">Anchorites</h2> <div class="container anchorites svelte-flej3j"></div></div> </div> </main> 
+			
+			<script>
+				{
+					__sveltekit_1hn9aer = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						assets: "/chantsofsennaar-phrases"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.Dz-683kg.js"),
+						import("./_app/immutable/entry/app.BouAuZFf.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

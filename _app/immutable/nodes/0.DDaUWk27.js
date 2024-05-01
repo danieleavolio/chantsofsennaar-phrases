@@ -1,1 +1,0 @@
-import{s as e}from"../chunks/scheduler.BfzGrP3v.js";import{S as n,i as s}from"../chunks/index.QdE9ThS2.js";function a(t,r,i){return[!0,"always"]}class u extends n{constructor(r){super(),s(this,r,a,null,e,{prerender:0,trailingSlash:1})}get prerender(){return this.$$.ctx[0]}get trailingSlash(){return this.$$.ctx[1]}}export{u as component};
