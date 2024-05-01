@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
 *{
     margin: 0;
@@ -10,7 +10,7 @@
 
 /* Now we create some variables to be used in all the web applicatin */
 
-:root{
+:root {
     --devotee-yellow: #fcf044;
     --devotee-red: #d82b5c;
 
@@ -29,5 +29,46 @@
     /* now we create some variables for our colors */
     --primary-color: #333;
     --secondary-color: #f9f9f9;
-    
+
+
+    .devotee {
+        background-color: var(--devotee-yellow);
+    }
+
+    .warriors {
+        background-color: var(--warriors-blue);
+    }
+
+    .bards {
+        background-color: var(--bards-blue);
+    }
+
+    .alchemists {
+        background-color: var(--alchemists-orange);
+    }
+
+    .anchorites {
+        background-color: var(--anchorites-red);
+    }
+
+    .devotee .image-container {
+        background-color: var(--devotee-red);
+    }
+
+    .warriors .image-container {
+        background-color: var(--warriors-red);
+    }
+
+    .bards .image-container {
+        background-color: var(--bards-purple);
+    }
+
+    .alchemists .image-container {
+        background-color: var(--alchemists-purple);
+    }
+
+    .anchorites .image-container {
+        background-color: var(--anchorites-purple);
+    }
+
 }
