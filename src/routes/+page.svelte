@@ -1,7 +1,6 @@
 <script>
     // @ts-nocheck
 
-    import { onMount } from "svelte";
     import Board from "../components/Board.svelte";
     import Diary from "../components/Diary.svelte";
 
