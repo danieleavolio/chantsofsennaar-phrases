@@ -31,8 +31,6 @@
 <style>
 
     .board{
-        background-color: var(--secondary-color);
-        color: var(--primary-color);
         border-radius: 0.1rem;
         padding: 1rem;
     }

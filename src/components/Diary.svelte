@@ -175,7 +175,7 @@
     /* Make a side bar for main content that is scrollable */
 
     .diary {
-        position: absolute;
+        position: absolute; /* Fixed Sidebar (stay in place on scroll) */
         top: 0;
         left: 0;
         width: 40vw;
