@@ -1,42 +1,58 @@
 <script>
-// @ts-nocheck
+    // @ts-n ocheck
 
-    import { onMount } from 'svelte';
-
+    // @ts-ignore
+    import { onMount } from "svelte";
+    // @ts-ignore
     /**
-     * @type {string[]}
+     * @type {any[]}
      */
-     export let phrases = [];
+    export let phrases = [];
+    // @ts-ignore
+    $: phrase = phrases;
 
-     /**
-      * @param {string} symbol
-      */
-     $: phrase = phrases.map((phrase) => phrase.split("/").pop().split(".")[0].replaceAll("'", " ").replace(/_/g, " ")).join(" ");
+    const removePhrase = (index) => {
+        console.log(index);
+        phrases = phrases.filter((_, i) => i !== index);
+    };
 </script>
 
 <div class="board">
-    <h1>Board</h1>
+    <h1>CHANTS OF SENNAAR: THE BOARD</h1>
     <div class="container">
-        {#each phrases as image}
-            <div class="image-container">
-                <img src={image} alt="{image.split("/").pop().split(".")[0].replaceAll("'", " ").replace(/_/g, " ")}" />    
+        {#each phrases as image, i}
+            <div on:click={() => removePhrase(i)} class="image-container">
+                <img src={image.path} />
             </div>
-        {/each}    
+        {/each}
     </div>
-    <h3>Your phrase is:</h3>
-    <p class="phrase">{phrase}</p>
+    <p class="phrase">
+        <!-- Take all the text from image -->
+        {phrase.map((image) => image.text).join(" ")}
+    </p>
 </div>
-
 
 <style>
 
-    .board{
+    h1{
+        color: var(--devotee-yellow);
+        text-align: center;
+        /* make font size big but responsive */
+        font-size: 3rem;
+    }
+    .board {
         border-radius: 0.1rem;
         padding: 1rem;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow-y: hidden;
+
     }
 
-    .container{
-        min-height: 40vh;
+    .container {
         border-radius: 0.1rem;
         padding: 1rem;
         display: flex;
@@ -45,10 +61,28 @@
         gap: 1rem;
     }
 
-    .phrase{
+    .phrase {
         font-size: 1.5rem;
         font-weight: bold;
+        font-style: italic;
         text-align: center;
     }
 
+    .image-container {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border: 1px solid black;
+        background-color: rgb(241, 237, 228);
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.5s;
+    }
+
+    .image-container:hover{
+        background-color: rgb(255, 93, 93);
+    }
 </style>

@@ -1,73 +1,65 @@
 <script>
+    export let images;
     import { onMount } from "svelte";
 
+    // @ts-nocheck
+
     /**
-     * @type {never[]}
+     * @type {any[]}
      */
     let devotee = [];
+
     /**
-     * @type {never[]}
+     * @type {any[]}
      */
     let warriors = [];
+
     /**
-     * @type {never[]}
+     * @type {any[]}
      */
     let bards = [];
+
     /**
-     * @type {never[]}
+     * @type {any[]}
      */
     let anchorites = [];
+
     /**
-     * @type {never[]}
+     * @type {any[]}
      */
     let alchemists = [];
 
     onMount(async () => {
-        let Devotee = import.meta.glob("$lib/Devotee/*.png");
-        let Warriors = import.meta.glob("$lib/Warriors/*.png");
-        let Bards = import.meta.glob("$lib/Bards/*.png");
-        let Anchorites = import.meta.glob("$lib/Anchorites/*.png");
-        let Alchemists = import.meta.glob("$lib/Alchemists/*.png");
-
-        devotee = await load_images(Devotee);
-        warriors = await load_images(Warriors);
-        bards = await load_images(Bards);
-        anchorites = await load_images(Anchorites);
-        alchemists = await load_images(Alchemists);
+        // Suddividi le immagini in base al tipo
+        images.forEach((image) => {
+            switch (image.type) {
+                case "Devotee":
+                    devotee = [...devotee, image];
+                    break;
+                case "Warriors":
+                    warriors = [...warriors, image];
+                    break;
+                case "Bards":
+                    bards = [...bards, image];
+                    break;
+                case "Anchorites":
+                    anchorites = [...anchorites, image];
+                    break;
+                case "Alchemists":
+                    alchemists = [...alchemists, image];
+                    break;
+                default:
+                    console.log("No type found");
+                    break;
+            }
+        });
     });
-
-    /**
-     * @param {Record<string, () => Promise<unknown>>} Elements
-     * @returns {Promise<never[]>}
-     */
-    let load_images = async (Elements) => {
-        /**
-         * @type {never[]}
-         */
-        let els = [];
-        const promises = [];
-        for (const key in Elements) {
-            // @ts-ignore
-            const promise = Elements[key]().then((mod) => {
-                // get the image
-                // @ts-ignore
-                els = [...els, mod.default];
-            });
-            promises.push(promise);
-        }
-        await Promise.all(promises);
-        return els;
-    };
 
     let isOpened = false;
 
-    /**
-     * @type {HTMLDivElement | null}
-     */
-    let diary = null;   
+    // @ts-ignore
+    let diary = null;
 
-    // @ts-ignore
-    // @ts-ignore
     const changeVisibility = () => {
         isOpened = !isOpened;
         if (isOpened) {
@@ -79,92 +71,73 @@
         }
     };
 
-  
+    /**
+     * @type {any[]}
+     */
+    export let phrase;
+    
 
+    // @ts-ignore
+    const addSymbol = (symbol) => {
+        // @ts-ignore
+        phrase = [...phrase, symbol];
+    };
 </script>
 
 <div bind:this={diary} class="diary">
     <div class="scrollings">
-        <span on:click={
-            changeVisibility
-        } class="material-symbols-outlined open"> apps </span>
-        <h2>Devotee</h2>
+        <span
+            on:click={changeVisibility}
+            class="material-symbols-outlined open"
+        >
+            apps
+        </span>
+        <h2 class="Devotee">Devotee</h2>
         <div class="container devotee">
             {#each devotee as image}
                 <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image} alt="Devotee" />
-                    <p class="name">
-                        {image
-                            .split("/")
-                            .pop()
-                            .split(".")[0]
-                            .replaceAll("'", " ")}
-                    </p>
+                    <img src={image.path} alt="Devotee" />
+                    <p class="name">{image.text}</p>
                 </div>
             {/each}
         </div>
 
-        <h2>Warriors</h2>
+        <h2 class="Warriors">Warriors</h2>
         <div class="container warriors">
             {#each warriors as image}
                 <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image} alt="Warrior" />
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <p class="name">
-                        {image
-                            .split("/")
-                            .pop()
-                            .split(".")[0]
-                            .replaceAll("'", " ")}
-                    </p>
+                    <img src={image.path} alt="Warrior" />
+                    <p class="name">{image.text}</p>
                 </div>
             {/each}
         </div>
 
-        <h2>Bards</h2>
+        <h2 class="Bards">Bards</h2>
         <div class="container bards">
             {#each bards as image}
                 <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image} alt="Bard" />
-                    <p class="name">
-                        {image
-                            .split("/")
-                            .pop()
-                            .split(".")[0]
-                            .replaceAll("'", " ")}
-                    </p>
+                    <img src={image.path} alt="Bard" />
+                    <p class="name">{image.text}</p>
                 </div>
             {/each}
         </div>
 
-        <h2>Alchemists</h2>
+        <h2 class="Alchemists">Alchemists</h2>
         <div class="container alchemists">
             {#each alchemists as image}
                 <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image} alt="Alchemist" />
-                    <p class="name">
-                        {image
-                            .split("/")
-                            .pop()
-                            .split(".")[0]
-                            .replaceAll("'", " ")}
-                    </p>
+                    <img src={image.path} alt="Alchemist" />
+                    <p class="name">{image.text}</p>
                 </div>
             {/each}
         </div>
 
-        <h2>Anchorites</h2>
+        <h2 class="Anchorites">Anchorites</h2>
         <div class="container anchorites">
             {#each anchorites as image}
                 <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image} alt="Anchorite" />
-                    <p class="name">
-                        {image
-                            .split("/")
-                            .pop()
-                            .split(".")[0]
-                            .replaceAll("'", " ")}
-                    </p>
+                    <img src={image.path} alt="Anchorite" />
+                    <p class="name">{image.text}</p>
                 </div>
             {/each}
         </div>
@@ -172,13 +145,10 @@
 </div>
 
 <style>
-    /* Make a side bar for main content that is scrollable */
-
     .diary {
-        position: absolute; /* Fixed Sidebar (stay in place on scroll) */
+        position: absolute;
         top: 0;
         left: 0;
-        width: 40vw;
         background-color: var(--primary-color);
         color: var(--secondary-color);
         width: 0;
@@ -188,9 +158,7 @@
     .scrollings {
         height: 100vh;
         overflow: scroll;
-        /* remove scrollbar */
         scrollbar-width: none;
-        /* remove scrollbar */
         -ms-overflow-style: none;
         text-align: center;
     }
@@ -216,7 +184,6 @@
         cursor: pointer;
     }
 
-    /* Hover on image affects name */
     .image-container:hover .name {
         display: block;
         opacity: 1;
@@ -239,9 +206,9 @@
         top: 50%;
         right: 0;
         transform: translateX(50%);
-        color: var(--secondary-color) ;
+        color: var(--secondary-color);
         font-size: 2em;
-        background-color:var(--primary-color);
+        background-color: var(--primary-color);
         border-radius: 100%;
         padding: 0.1em;
         z-index: 2;
@@ -253,4 +220,26 @@
     .open:hover {
         opacity: 1;
     }
+
+    .Devotee {
+        color: var(--devotee-yellow);
+    }
+
+    .Warriors {
+        color: var(--warriors-blue);
+    }
+
+    .Bards {
+        color: var(--bards-blue);
+    }
+
+    .Alchemists {
+        color: var(--alchemists-orange);
+    }
+
+    .Anchorites {
+        color: var(--anchorites-red);
+    }
+
+
 </style>

@@ -4,12 +4,9 @@
     import Board from "../components/Board.svelte";
     import Diary from "../components/Diary.svelte";
 
+    export let data;
 
     let phrase = [];
-
-    const addSymbol = (symbol) => {
-        phrase = [...phrase, symbol];
-    };
 
     
 </script>
@@ -18,7 +15,7 @@
 
     <Board bind:phrases={phrase} />
 
-    <Diary> </Diary>
+    <Diary images={data.images} bind:phrase={phrase}> </Diary>
     
 </main>
 
