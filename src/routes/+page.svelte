@@ -4,6 +4,7 @@
     import Board from "../components/Board.svelte";
     import Diary from "../components/Diary.svelte";
     import Footer from "../components/Footer.svelte";
+    import Seo from "../components/SEO.svelte";
 
     export let data;
 
@@ -13,6 +14,8 @@
 </script>
 
 <main>
+
+    <Seo />
 
     <Board bind:phrases={phrase} />
 
