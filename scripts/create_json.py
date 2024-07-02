@@ -13,7 +13,7 @@ def sanitize_filename(filename):
 
 def create_json():
     images = []
-    base_path = "src/lib"
+    base_path = "static/"
     for folder in os.listdir(base_path):
         folder_path = os.path.join(base_path, folder)
         if os.path.isdir(folder_path):
@@ -23,11 +23,11 @@ def create_json():
                     sanitized_image_name = sanitize_filename(image)
                     images.append({
                         "type": sanitize_filename(folder),
-                        "path": f"src/lib/{folder}/{image}",
+                        "path": f"/{folder}/{image}",
                         "text": sanitized_image_name
                     })
     
-    with open("src/lib/files.json", "w") as f:
+    with open("static/files.json", "w") as f:
         json.dump({"images": images}, f, indent=4)
 
 if __name__ == "__main__":

@@ -29,6 +29,7 @@
         padding: 1em;
         background-color: var(--primary-color);
         color: var(--secondary-color);
+        min-height: 100vh;
     }
 
 </style>

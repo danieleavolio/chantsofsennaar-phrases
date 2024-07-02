@@ -6,12 +6,20 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+}
+
+html{
+    background-color: var(--primary-color);
+    scrollbar-color: var(--devotee-yellow) var(--primary-color);
+    scrollbar-width: thin;
+    min-height: 100vh;
+    scroll-behavior: smooth;
 }
 
 body{
-    overflow: hidden;
+    min-height: 100vh;
 }
-
 /* Now we create some variables to be used in all the web applicatin */
 
 :root {

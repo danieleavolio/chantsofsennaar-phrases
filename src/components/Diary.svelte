@@ -1,6 +1,7 @@
 <script>
     export let images;
-    import { onMount } from "svelte";
+    // @ts-ignore
+    import { onMount, tick } from "svelte";
 
     // @ts-nocheck
 
@@ -31,7 +32,7 @@
 
     onMount(async () => {
         // Suddividi le immagini in base al tipo
-        images.forEach((image) => {
+        images.forEach((/** @type {{ type: any; }} */ image) => {
             switch (image.type) {
                 case "Devotee":
                     devotee = [...devotee, image];
@@ -58,40 +59,49 @@
     let isOpened = false;
 
     // @ts-ignore
+    /**
+     * @type {HTMLDivElement | null}
+     */
     let diary = null;
 
     const changeVisibility = () => {
+        // scroll to the bottom of the page
         isOpened = !isOpened;
         if (isOpened) {
             // @ts-ignore
-            diary.style.width = "40vw";
+            diary.style.height = "50vh";
+            setTimeout(() => {
+                // scroll to the bottom of the page
+                scroll(0, document.body.scrollHeight);
+            }, 500);
         } else {
             // @ts-ignore
-            diary.style.width = "0";
+            diary.style.height = "0";
         }
     };
 
     /**
      * @type {any[]}
      */
+    // @ts-ignore
     export let phrase;
-    
 
     // @ts-ignore
     const addSymbol = (symbol) => {
         // @ts-ignore
         phrase = [...phrase, symbol];
+        setTimeout(() => {
+            // scroll to the bottom of the page
+            scroll(0, document.body.scrollHeight);
+        }, 20);
     };
 </script>
 
 <div bind:this={diary} class="diary">
+    <span on:click={changeVisibility} class="material-symbols-outlined open">
+        apps
+    </span>
     <div class="scrollings">
-        <span
-            on:click={changeVisibility}
-            class="material-symbols-outlined open"
-        >
-            apps
-        </span>
         <h2 class="Devotee">Devotee</h2>
         <div class="container devotee">
             {#each devotee as image}
@@ -146,17 +156,18 @@
 
 <style>
     .diary {
-        position: absolute;
-        top: 0;
-        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
         background-color: var(--primary-color);
         color: var(--secondary-color);
-        width: 0;
         transition: all 0.5s ease-in-out;
+        width: 80%;
+        height: 0;
     }
 
     .scrollings {
-        height: 100vh;
+        height: 100%;
         overflow: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -167,9 +178,11 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
         gap: 1em;
         padding: 2em 0;
         margin: 1em 0;
+        overflow: hidden;
     }
 
     .image-container {
@@ -203,22 +216,23 @@
 
     .open {
         position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateX(50%);
+        /* center on top */
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
         color: var(--secondary-color);
         font-size: 2em;
         background-color: var(--primary-color);
         border-radius: 100%;
         padding: 0.1em;
         z-index: 2;
-        opacity: 0.2;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
     }
 
     .open:hover {
-        opacity: 1;
+        background-color: var(--alchemists-orange);
+        color: var(--alchemists-purple);
     }
 
     .Devotee {
@@ -240,6 +254,4 @@
     .Anchorites {
         color: var(--anchorites-red);
     }
-
-
 </style>
