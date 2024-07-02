@@ -30,7 +30,8 @@
     <h1 align:center>
         CHANTS OF SENNAAR - PHRASES    </h1>
         <p>
-            This website is intended for people who have <b>already finished the game</b>. 
+            This website is intended for people who have <b>already finished the game</b> since it 
+            contains <b>heavy spoilers</b> of the game and its content. 
             If you haven't, please close this page and come back later. There is no need to 
             <b>ruin the experience of the game</b> by using this tool. Enjoy the game!
             If you have already finished the game, just close this message and have fun! You will not 
