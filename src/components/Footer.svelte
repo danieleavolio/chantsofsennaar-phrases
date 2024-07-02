@@ -14,6 +14,7 @@
     footer {
         position: fixed;
         bottom: 0;
+        left: 0;
         width: 100%;
         background-color: var(--primary-color);
         color: var(--secondary-color);

@@ -4,6 +4,13 @@
 
 <!-- SEO -->
 
+<!-- Seo title -->
+<title>Chants of Sennaar Phrases</title>
+
+<!-- Seo favicon -->
+<link rel="icon" type="image/png" href="favicon.png" />
+
+
 <meta name="description" content="Chants of Sennaar Phrases is a web app that makes you generate
     phrases using glyphs from the game Chants of Sennaar. Remember to support the game on Steam!" />
 <meta name="keywords" content="Chants of Sennaar, Phrases, Generator, Game, Steam, Daniele Avolio" />
@@ -18,11 +25,6 @@
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Chants of Sennaar Phrases" />
 
-<!-- Seo title -->
-<title>Chants of Sennaar Phrases</title>
-
-<!-- Seo favicon -->
-<link rel="icon" type="image/png" href="favicon.png" />
 
 <style>
 

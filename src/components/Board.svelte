@@ -21,7 +21,7 @@
 </script>
 
 <div class="board">
-    <h1>CHANTS OF SENNAAR: THE BOARD</h1>
+    <h1>CHANTS OF SENNAAR: PHRASES</h1>
     <div class="container">
         {#each phrases as image, i(i)}
             <!-- svelte-ignore a11y-no-static-element-interactions -->

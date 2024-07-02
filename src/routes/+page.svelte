@@ -3,6 +3,7 @@
 
     import Board from "../components/Board.svelte";
     import Diary from "../components/Diary.svelte";
+    import Disclaimer from "../components/Disclaimer.svelte";
     import Footer from "../components/Footer.svelte";
     import Seo from "../components/SEO.svelte";
 
@@ -16,6 +17,9 @@
 <main>
 
     <Seo />
+
+    <Disclaimer />
+
 
     <Board bind:phrases={phrase} />
 
