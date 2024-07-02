@@ -3,6 +3,7 @@
 
     import Board from "../components/Board.svelte";
     import Diary from "../components/Diary.svelte";
+    import Footer from "../components/Footer.svelte";
 
     export let data;
 
@@ -17,6 +18,7 @@
 
     <Diary images={data.images} bind:phrase={phrase}> </Diary>
     
+    <Footer />
 </main>
 
 <style>
