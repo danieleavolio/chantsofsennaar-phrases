@@ -1,8 +1,4 @@
 <script>
-    // @ts-nocheck
-
-    // @ts-n ocheck
-
     // @ts-ignore
     // @ts-ignore
     import { onMount } from "svelte";
@@ -14,6 +10,9 @@
      * @type {any[]}
      */
     export let phrases = [];
+    let exportText = true;
+    let exportBackground = true;
+    let showSettings = false;
 
     // @ts-ignore
     $: phrase = phrases;
@@ -26,22 +25,26 @@
     const downloadImage = () => {
         const element = document.querySelector(".board");
         // @ts-ignore
+        // get the phrase 
+        const phrase = document.querySelector(".phrase");
+
+        // @ts-ignore
+        phrase.style.display = exportText ? "block" : "none";
+        // @ts-ignore
         html2canvas(element, {
-            backgroundColor: "#191919",
+            backgroundColor: exportBackground ? "#191919" : 'none',
             scale: 2,
-        }).then((canvas) => {
+        },
+    ).then((canvas) => {
             const link = document.createElement("a");
             link.download = "chant.png";
             link.href = canvas.toDataURL();
             link.click();
         });
     };
-
-
 </script>
 
 <h1>CHANTS OF SENNAAR: PHRASES</h1>
-
 
 <div class="board">
     <div class="container">
@@ -86,6 +89,25 @@
             }}>Download Image</button
         >
     </div>
+
+    <button class="settings-button"
+        on:click={() => (showSettings = !showSettings)}
+        transition:fade={{
+            delay: 200,
+            duration: 500,
+        }}>{showSettings ? 'Close' : 'Show' } Export Settings</button
+    >
+    {#if showSettings}
+        <div transition:fade class="settings">
+            <h3>Export Settings</h3>
+            <div class="export-settings">
+                <input type="checkbox" bind:checked={exportText} />
+                <label class="{exportText ? 'active' : ''}" for="exportText">Export Text</label>
+                <input type="checkbox" bind:checked={exportBackground} />
+                <label class="{exportBackground ? 'active' : ''}" for="exportBackground">Export Background</label>
+            </div>
+        </div>
+    {/if}
 {/if}
 
 <style>
@@ -94,6 +116,76 @@
         text-align: center;
         /* make font size big but responsive */
         font-size: 3rem;
+    }
+
+    h3 {
+        color: var(--devotee-yellow);
+        text-align: center;
+        /* make font size big but responsive */
+        font-size: 2rem;
+    }
+
+    label{
+        transition: all 0.5s ease;
+    }
+
+    .active{
+        color: var(--devotee-yellow);
+    }
+
+    .settings-button {
+        background-color: var(--primary-color);
+        color: var(--devotee-yellow);
+        border: 1px solid var(--devotee-yellow);
+        padding: 0.5rem 1rem;
+        border-radius: 0.1rem;
+        cursor: pointer;
+        transition: background-color 0.5s;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 1em;
+        /* capitalize */
+        text-transform: uppercase;
+    }
+
+    .settings {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--devotee-red);
+        gap: 2em;
+        padding: 1em;
+    }
+
+    .export-settings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        flex-direction: row;
+        margin: 0 0.5rem;
+        border: 1px solid var(--primary-color);
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        transition: all 0.5s;
+        cursor: pointer;
+        border-radius: 0.2em;
+    }
+
+    input[type="checkbox"]:checked {
+        background-color: var(--devotee-yellow);
+    }
+
+
+    input[type="checkbox"]:focus {
+        outline: none;
     }
 
     button {
@@ -116,7 +208,6 @@
         color: var(--devotee-yellow);
     }
 
-
     .download {
         background-color: var(--primary-color);
         color: var(--devotee-yellow);
@@ -126,7 +217,7 @@
     .download:hover {
         background-color: var(--devotee-red);
     }
-    
+
     .buttons {
         display: flex;
         gap: 1em;
@@ -185,7 +276,7 @@
         gap: 1rem;
     }
 
-    .symbol{
+    .symbol {
         /* uppercase */
         text-transform: uppercase;
     }
