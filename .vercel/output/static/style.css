@@ -56,11 +56,13 @@ body{
     }
 
     .alchemists {
-        background-color: var(--alchemists-orange);
+        filter:invert(1);
+        background-color: #028ba7;
     }
 
     .anchorites {
-        background-color: var(--anchorites-red);
+        filter:invert(1);
+        background-color: #18e671;
     }
 
     .devotee .image-container {
@@ -76,11 +78,11 @@ body{
     }
 
     .alchemists .image-container {
-        background-color: var(--alchemists-purple);
-    }
+        /* background-color: var(--alchemists-orange); */
+        background-color: #a1ca86;    }
 
     .anchorites .image-container {
-        background-color: var(--anchorites-purple);
-    }
+        background-color: #9ed04a;
+        }
 
 }
