@@ -117,7 +117,7 @@
         <h2 class="Devotee">Devotee</h2>
         <div class="container devotee">
             {#each devotee as image}
-                <div>
+                <div class="both">
                     <div
                         on:click={() => addSymbol(image)}
                         class="image-container"
@@ -137,7 +137,7 @@
         <h2 class="Warriors">Warriors</h2>
         <div class="container warriors">
             {#each warriors as image}
-                <div>
+                <div class="both">
                     <div
                         on:click={() => addSymbol(image)}
                         class="image-container"
@@ -157,7 +157,7 @@
         <h2 class="Bards">Bards</h2>
         <div class="container bards">
             {#each bards as image}
-                <div>
+                <div class="both">
                     <div
                         on:click={() => addSymbol(image)}
                         class="image-container"
@@ -177,7 +177,7 @@
         <h2 class="Alchemists">Alchemists</h2>
         <div class="container alchemists">
             {#each alchemists as image}
-                <div>
+                <div class="both">
                     <div
                         on:click={() => addSymbol(image)}
                         class="image-container"
@@ -197,7 +197,7 @@
         <h2 class="Anchorites">Anchorites</h2>
         <div class="container anchorites">
             {#each anchorites as image}
-                <div>
+                <div class="both">
                     <div
                         on:click={() => addSymbol(image)}
                         class="image-container"
@@ -228,6 +228,12 @@
         height: 0;
     }
 
+    .both{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .check {
         display: flex;
         justify-content: center;
