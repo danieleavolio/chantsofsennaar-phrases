@@ -1,71 +1,105 @@
 <script>
+    // @ts-nocheck
+
     // @ts-n ocheck
 
+    // @ts-ignore
     // @ts-ignore
     import { onMount } from "svelte";
     import { flip } from "svelte/animate";
     import { fade } from "svelte/transition";
+    import html2canvas from "html2canvas";
     // @ts-ignore
     /**
      * @type {any[]}
      */
     export let phrases = [];
+
     // @ts-ignore
     $: phrase = phrases;
-
 
     const removePhrase = (/** @type {number} */ index) => {
         console.log(index);
         phrases = phrases.filter((_, i) => i !== index);
     };
+
+    const downloadImage = () => {
+        const element = document.querySelector(".board");
+        // @ts-ignore
+        html2canvas(element, {
+            backgroundColor: "#191919",
+            scale: 2,
+        }).then((canvas) => {
+            const link = document.createElement("a");
+            link.download = "chant.png";
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    };
+
+
 </script>
 
+<h1>CHANTS OF SENNAAR: PHRASES</h1>
+
+
 <div class="board">
-    <h1>CHANTS OF SENNAAR: PHRASES</h1>
     <div class="container">
-        {#each phrases as image, i(i)}
+        {#each phrases as image, i (i)}
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div transition:fade animate:flip
-             on:click={() => removePhrase(i)} class="image-container">
+            <div
+                transition:fade
+                animate:flip
+                on:click={() => removePhrase(i)}
+                class="image-container"
+            >
                 <img src={image.path} />
             </div>
         {/each}
     </div>
-    <p 
-     class="phrase">
+    <p class="phrase">
         <!-- Take all the text from image -->
-         {#each phrase as symbol, i(i)}
-         <div transition:fade animate:flip
-         class="symbol">
-             {symbol.text}
-        </div>
-         {/each}
+        {#each phrase as symbol, i (i)}
+            <div transition:fade animate:flip class="symbol">
+                {symbol.text}
+            </div>
+        {/each}
     </p>
-
-    {#if phrase.length}
-        <button transition:fade={{
-            delay: 200,
-            duration: 500
-        }}
-         on:click={() => phrases = []}>Clear</button>
-    {/if}
-
 </div>
 
-<style>
+{#if phrase.length}
+    <div class="buttons">
+        <button
+            transition:fade={{
+                delay: 200,
+                duration: 500,
+            }}
+            on:click={() => (phrases = [])}>Clear</button
+        >
+        <button
+            on:click={() => downloadImage()}
+            class="download"
+            transition:fade={{
+                delay: 200,
+                duration: 500,
+            }}>Download Image</button
+        >
+    </div>
+{/if}
 
-    h1{
+<style>
+    h1 {
         color: var(--devotee-yellow);
         text-align: center;
         /* make font size big but responsive */
         font-size: 3rem;
     }
 
-    button{
-        background-color: var(--devotee-yellow);
+    button {
+        background-color: var(--primary-color);
         color: var(--devotee-red);
-        border: none;
+        border: 1px solid var(--devotee-red);
         padding: 0.5rem 1rem;
         border-radius: 0.1rem;
         cursor: pointer;
@@ -77,9 +111,27 @@
         text-transform: uppercase;
     }
 
-    button:hover{
+    button:hover {
         background-color: var(--devotee-red);
         color: var(--devotee-yellow);
+    }
+
+
+    .download {
+        background-color: var(--primary-color);
+        color: var(--devotee-yellow);
+        border: 1px solid var(--devotee-yellow);
+    }
+
+    .download:hover {
+        background-color: var(--devotee-red);
+    }
+    
+    .buttons {
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        align-items: center;
     }
     .board {
         border-radius: 0.1rem;
@@ -97,7 +149,7 @@
         padding: 1rem;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: start;
         gap: 1rem;
     }
 
@@ -105,7 +157,7 @@
         font-size: 1.5rem;
         font-weight: bold;
         font-style: italic;
-        text-align: center;
+        text-align: start;
     }
 
     .image-container {
@@ -122,14 +174,19 @@
         transition: background-color 0.5s;
     }
 
-    .image-container:hover{
+    .image-container:hover {
         background-color: rgb(255, 93, 93);
     }
 
-    .phrase{
+    .phrase {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: start;
         gap: 1rem;
+    }
+
+    .symbol{
+        /* uppercase */
+        text-transform: uppercase;
     }
 </style>

@@ -2,6 +2,7 @@
     export let images;
     // @ts-ignore
     import { onMount, tick } from "svelte";
+    import { fade } from "svelte/transition";
 
     // @ts-nocheck
 
@@ -29,6 +30,8 @@
      * @type {any[]}
      */
     let alchemists = [];
+
+    let shownames = false;
 
     onMount(async () => {
         // Suddividi le immagini in base al tipo
@@ -102,12 +105,31 @@
         apps
     </span>
     <div class="scrollings">
+        <div class="check">
+            <input
+                bind:checked={shownames}
+                type="checkbox"
+                name="shownames"
+                id="names"
+            />
+            <label for="shownames">Show names</label>
+        </div>
         <h2 class="Devotee">Devotee</h2>
         <div class="container devotee">
             {#each devotee as image}
-                <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image.path} alt="Devotee" />
-                    <p class="name">{image.text}</p>
+                <div>
+                    <div
+                        on:click={() => addSymbol(image)}
+                        class="image-container"
+                    >
+                        <img src={image.path} alt="Devotee" />
+                        {#if !shownames}
+                            <p class="name">{image.text}</p>
+                        {/if}
+                    </div>
+                    {#if shownames}
+                        <p transition:fade class="shown-names">{image.text}</p>
+                    {/if}
                 </div>
             {/each}
         </div>
@@ -115,9 +137,19 @@
         <h2 class="Warriors">Warriors</h2>
         <div class="container warriors">
             {#each warriors as image}
-                <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image.path} alt="Warrior" />
-                    <p class="name">{image.text}</p>
+                <div>
+                    <div
+                        on:click={() => addSymbol(image)}
+                        class="image-container"
+                    >
+                        <img src={image.path} alt="Warrior" />
+                        {#if !shownames}
+                            <p class="name">{image.text}</p>
+                        {/if}
+                    </div>
+                    {#if shownames}
+                        <p transition:fade class="shown-names">{image.text}</p>
+                    {/if}
                 </div>
             {/each}
         </div>
@@ -125,9 +157,19 @@
         <h2 class="Bards">Bards</h2>
         <div class="container bards">
             {#each bards as image}
-                <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image.path} alt="Bard" />
-                    <p class="name">{image.text}</p>
+                <div>
+                    <div
+                        on:click={() => addSymbol(image)}
+                        class="image-container"
+                    >
+                        <img src={image.path} alt="Bard" />
+                        {#if !shownames}
+                            <p class="name">{image.text}</p>
+                        {/if}
+                    </div>
+                    {#if shownames}
+                        <p transition:fade class="shown-names">{image.text}</p>
+                    {/if}
                 </div>
             {/each}
         </div>
@@ -135,9 +177,19 @@
         <h2 class="Alchemists">Alchemists</h2>
         <div class="container alchemists">
             {#each alchemists as image}
-                <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image.path} alt="Alchemist" />
-                    <p class="name">{image.text}</p>
+                <div>
+                    <div
+                        on:click={() => addSymbol(image)}
+                        class="image-container"
+                    >
+                        <img src={image.path} alt="Alchemist" />
+                        {#if !shownames}
+                            <p class="name">{image.text}</p>
+                        {/if}
+                    </div>
+                    {#if shownames}
+                        <p transition:fade class="shown-names">{image.text}</p>
+                    {/if}
                 </div>
             {/each}
         </div>
@@ -145,9 +197,19 @@
         <h2 class="Anchorites">Anchorites</h2>
         <div class="container anchorites">
             {#each anchorites as image}
-                <div on:click={() => addSymbol(image)} class="image-container">
-                    <img src={image.path} alt="Anchorite" />
-                    <p class="name">{image.text}</p>
+                <div>
+                    <div
+                        on:click={() => addSymbol(image)}
+                        class="image-container"
+                    >
+                        <img src={image.path} alt="Anchorite" />
+                        {#if !shownames}
+                            <p class="name">{image.text}</p>
+                        {/if}
+                    </div>
+                    {#if shownames}
+                        <p transition:fade class="shown-names">{image.text}</p>
+                    {/if}
                 </div>
             {/each}
         </div>
@@ -166,12 +228,27 @@
         height: 0;
     }
 
+    .check {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    label {
+        margin: 0 0.5em;
+        color: var(--devotee-yellow);
+    }
+
     .scrollings {
         height: 100%;
         overflow: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
         text-align: center;
+    }
+
+    .shown-names {
+        filter: invert(1);
     }
 
     .container {
