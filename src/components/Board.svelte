@@ -25,17 +25,16 @@
     const downloadImage = () => {
         const element = document.querySelector(".board");
         // @ts-ignore
-        // get the phrase 
+        // get the phrase
         const phrase = document.querySelector(".phrase");
 
         // @ts-ignore
         phrase.style.display = exportText ? "block" : "none";
         // @ts-ignore
         html2canvas(element, {
-            backgroundColor: exportBackground ? "#191919" : 'none',
+            backgroundColor: exportBackground ? "#191919" : "none",
             scale: 2,
-        },
-    ).then((canvas) => {
+        }).then((canvas) => {
             const link = document.createElement("a");
             link.download = "chant.png";
             link.href = canvas.toDataURL();
@@ -86,25 +85,35 @@
             transition:fade={{
                 delay: 200,
                 duration: 500,
-            }}>Download Image</button
+            }}>Export Image</button
         >
     </div>
 
-    <button class="settings-button"
+    <button
+        class="settings-button"
         on:click={() => (showSettings = !showSettings)}
         transition:fade={{
             delay: 200,
             duration: 500,
-        }}>{showSettings ? 'Close' : 'Show' } Export Settings</button
+        }}>{showSettings ? "Close" : "Show"} Export Settings</button
     >
     {#if showSettings}
         <div transition:fade class="settings">
             <h3>Export Settings</h3>
             <div class="export-settings">
-                <input type="checkbox" bind:checked={exportText} />
-                <label class="{exportText ? 'active' : ''}" for="exportText">Export Text</label>
-                <input type="checkbox" bind:checked={exportBackground} />
-                <label class="{exportBackground ? 'active' : ''}" for="exportBackground">Export Background</label>
+                <div>
+                    <input type="checkbox" bind:checked={exportText} />
+                    <label class={exportText ? "active" : ""} for="exportText"
+                        >Export Text</label
+                    >
+                </div>
+                <div>
+                    <input type="checkbox" bind:checked={exportBackground} />
+                    <label
+                        class={exportBackground ? "active" : ""}
+                        for="exportBackground">Export Background</label
+                    >
+                </div>
             </div>
         </div>
     {/if}
@@ -125,11 +134,11 @@
         font-size: 2rem;
     }
 
-    label{
+    label {
         transition: all 0.5s ease;
     }
 
-    .active{
+    .active {
         color: var(--devotee-yellow);
     }
 
@@ -143,9 +152,10 @@
         transition: background-color 0.5s;
         font-size: 1.5rem;
         font-weight: 600;
-        margin: 1em;
+        margin: auto;
         /* capitalize */
         text-transform: uppercase;
+        width: fit-content;
     }
 
     .settings {
@@ -156,6 +166,8 @@
         background-color: var(--devotee-red);
         gap: 2em;
         padding: 1em;
+        margin: auto;
+        width: fit-content;
     }
 
     .export-settings {
@@ -182,7 +194,6 @@
     input[type="checkbox"]:checked {
         background-color: var(--devotee-yellow);
     }
-
 
     input[type="checkbox"]:focus {
         outline: none;
@@ -279,5 +290,12 @@
     .symbol {
         /* uppercase */
         text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+        .export-settings {
+            flex-direction: column;
+            align-items: start;
+        }
     }
 </style>
