@@ -25,12 +25,6 @@
     const downloadImage = () => {
         const element = document.querySelector(".board");
         // @ts-ignore
-        // get the phrase
-        const phrase = document.querySelector(".phrase");
-
-        // @ts-ignore
-        phrase.style.display = exportText ? "block" : "none";
-        // @ts-ignore
         html2canvas(element, {
             backgroundColor: exportBackground ? "#191919" : "none",
             scale: 2,
@@ -41,6 +35,8 @@
             link.click();
         });
     };
+
+    let selectedGlyphType = "none";
 </script>
 
 <h1>CHANTS OF SENNAAR: PHRASES</h1>
@@ -54,20 +50,22 @@
                 transition:fade
                 animate:flip
                 on:click={() => removePhrase(i)}
-                class="image-container"
+                class="image-container {selectedGlyphType}"
             >
                 <img src={image.path} />
             </div>
         {/each}
     </div>
-    <p class="phrase">
-        <!-- Take all the text from image -->
-        {#each phrase as symbol, i (i)}
-            <div transition:fade animate:flip class="symbol">
-                {symbol.text}
-            </div>
-        {/each}
-    </p>
+    {#if exportText}
+        <p transition:fade class="phrase">
+            <!-- Take all the text from image -->
+            {#each phrase as symbol, i (i)}
+                <div transition:fade animate:flip class="symbol">
+                    {symbol.text}
+                </div>
+            {/each}
+        </p>
+    {/if}
 </div>
 
 {#if phrase.length}
@@ -114,6 +112,28 @@
                         for="exportBackground">Export Background</label
                     >
                 </div>
+                <div class="dropdown">
+                    <label class="glyphtype" for="glyphtype">Glyph type</label>
+                    <select
+                        bind:value={selectedGlyphType}
+                        name="glyphtype"
+                        id="glyphtype"
+                        class={selectedGlyphType}
+                    >
+                        <option class="none" value="none">None</option>
+                        <option class="devotee" value="devotee">Devotee</option>
+                        <option class="warriors" value="warriors"
+                            >Warriors</option
+                        >
+                        <option class="bards" value="bards">Bards</option>
+                        <option class="alchemists" value="alchemists"
+                            >Alchemists</option
+                        >
+                        <option class="anchorites" value="anchorites"
+                            >Anchorites</option
+                        >
+                    </select>
+                </div>
             </div>
         </div>
     {/if}
@@ -134,8 +154,74 @@
         font-size: 2rem;
     }
 
+    .image-container {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border: 1px solid black;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.5s;
+    }
+
+    .image-container:hover {
+        background-color: rgb(255, 93, 93);
+    }
+
     label {
         transition: all 0.5s ease;
+    }
+
+    option {
+        font-weight: 600;
+    }
+
+    select {
+        background-color: var(--devotee-yellow);
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 0.5rem 1rem;
+        border-radius: 0.1rem;
+        cursor: pointer;
+        transition: background-color 0.5s;
+        font-weight: 600;
+        margin: auto;
+        /* capitalize */
+        text-transform: uppercase;
+        width: fit-content;
+    }
+    select:focus {
+        outline: none;
+    }
+
+    select:active,
+    select:hover {
+        outline: none;
+    }
+
+    option:hover {
+        background-color: var(--devotee-red);
+    }
+
+    .none{
+        background-color: var(--secondary-color);
+    }
+
+    .alchemists {
+        background-color: var(--alchemists-orange);
+        filter: none;
+    }
+
+    .anchorites {
+        background-color: var(--anchorites-red);
+        filter: none;
+    }
+
+    .glyphtype {
+        color: var(--devotee-yellow);
     }
 
     .active {
@@ -260,24 +346,6 @@
         font-weight: bold;
         font-style: italic;
         text-align: start;
-    }
-
-    .image-container {
-        position: relative;
-        width: 60px;
-        height: 60px;
-        border: 1px solid black;
-        background-color: rgb(241, 237, 228);
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: background-color 0.5s;
-    }
-
-    .image-container:hover {
-        background-color: rgb(255, 93, 93);
     }
 
     .phrase {
